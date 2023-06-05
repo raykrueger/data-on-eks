@@ -11,9 +11,14 @@
 
 # Script usage ./taxi-trip-execute my-s3-bucket us-west-2
 
-if [ $# -ne 3 ]; then
+if [ $# -ne 2 ]; then
   echo "Usage: $0 <S3_BUCKET> <REGION>"
   exit 1
+fi
+
+if [ ! command -v wget &> /dev/null ]; then
+    echo "wget could not be found, please install wget"
+    exit 1
 fi
 
 S3_BUCKET="$1"
