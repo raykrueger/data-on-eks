@@ -38,6 +38,15 @@ data "aws_iam_policy_document" "spark_operator" {
       "s3:PutObject",
     ]
   }
+  statement {
+    sid       = ""
+    effect    = "Allow"
+    resources = ["arn:${data.aws_partition.current.partition}:s3express:*:*:*"]
+
+    actions = [
+      "s3express:CreateSession",
+    ]
+  }
 
   statement {
     sid       = ""

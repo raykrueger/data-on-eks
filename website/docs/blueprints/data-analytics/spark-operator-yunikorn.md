@@ -371,6 +371,41 @@ Intel Nodepool (AMD): Set the weight of the Intel Nodepool to `50`. This ensures
 
 </CollapsibleContent>
 
+<CollapsibleContent header={<h2><span>S3 Express Directory Bucket Example</span></h2>}>
+
+If you are interested in testing S3 Express One Zone Directory buckets and the
+S3 mountpoint CSI driver, you will need to deploy the Data on EKS solution into
+one of the [supported regions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-networking.html).
+
+```bash
+cd ${DOEKS_HOME}/analytics/terraform/spark-k8s-operator/examples/s3-express
+```
+
+We are going to use the $S3_BUCKET variable deployed as part of the
+spark-operator deployment above. You will then create an S3 express bucket and
+copy the data over from the Data on EKS bucket.
+
+<TaxiTripExecute />
+
+This sample contains a separate Terraform application stack that creates the S3
+Express Directory Bucket. You will deploy that then populate the bucket.
+
+``` bash
+export TF_VAR_region=YOUR_REGION_HERE
+terraform init
+terraform apply
+export S3_EXP_BUCKET=$(terraform output -raw s3_express_directory_bucket_name)
+```
+
+Now that the S3 Express Bucket is in place you can copy the sample data into it.
+
+```bash
+aws s3 cp --recursive s3://${S3_BUCKET}/taxi-trip/input/ s3://${S3_EXP_BUCKET}/taxi-trip/input/
+aws s3 cp --recursive s3://${S3_BUCKET}/taxi-trip/scripts/ s3://${S3_EXP_BUCKET}/taxi-trip/scripts/
+```
+
+
+</CollapsibleContent>
 
 <CollapsibleContent header={<h2><span>Cleanup</span></h2>}>
 
@@ -380,7 +415,6 @@ This script will cleanup the environment using `-target` option to ensure all th
 cd ${DOEKS_HOME}/analytics/terraform/spark-k8s-operator && chmod +x cleanup.sh
 ./cleanup.sh
 ```
-
 </CollapsibleContent>
 
 :::caution

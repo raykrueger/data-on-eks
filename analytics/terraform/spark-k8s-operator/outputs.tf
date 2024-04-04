@@ -40,3 +40,13 @@ output "grafana_secret_name" {
   description = "Grafana password secret name"
   value       = aws_secretsmanager_secret.grafana.name
 }
+
+output "vpc_id" {
+  description = "VPC ID"
+  value       = module.vpc.vpc_id
+}
+
+output "route_table_ids" {
+  description = "Route table IDs"
+  value       = module.vpc.private_route_table_ids
+}
