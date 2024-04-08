@@ -100,9 +100,9 @@ spec:
       fsGroup: 2000  # Group ID
       runAsUser: 1000  # User ID
     cores: 1
-    coreLimit: "3400m"
-    instances: 4
-    memory: "4g"
+    #coreLimit: "3400m"
+    instances: 10
+    memory: "32g"
     memoryOverhead: "4g"
     serviceAccount: spark-team-a
     labels:
