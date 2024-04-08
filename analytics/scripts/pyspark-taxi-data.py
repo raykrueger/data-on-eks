@@ -39,7 +39,7 @@ def main(args):
     # Beef up the data by duplicating it 100 times
     for i in range(100):
         ny_taxi_df = ny_taxi_df.union(ny_taxi_df)
-        if i % 10 == 0:
+        if i > 0 and i % 10 == 0:
             logger.info("Repartitioning")
             ny_taxi_df = ny_taxi_df.repartition(i)
 

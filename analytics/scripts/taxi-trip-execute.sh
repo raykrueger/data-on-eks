@@ -24,9 +24,6 @@ INPUT_DATA_S3_PATH="s3://${S3_BUCKET}/taxi-trip/input/"
 # Create a local input folder
 mkdir input
 
-# Copy PySpark Script to S3 bucket
-aws s3 cp pyspark-taxi-trip.py s3://${S3_BUCKET}/taxi-trip/scripts/ --region ${REGION}
-
 # Copy Test Input data to S3 bucket
 wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2022-01.parquet -O "input/yellow_tripdata_2022-0.parquet"
 aws s3 cp "input/yellow_tripdata_2022-0.parquet" s3://${S3_BUCKET}/taxi-trip/temp/yellow_tripdata_2022-0.parquet
