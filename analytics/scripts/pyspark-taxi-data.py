@@ -43,7 +43,7 @@ def main(args):
     logger.info("Total number of records: " + str(ny_taxi_df.count()))
 
     logger.info("Repartitioning")
-    ny_taxi_df = ny_taxi_df.repartition(int(1024 * 1024 / 100))
+    ny_taxi_df = ny_taxi_df.repartition(100)
 
     #logger.info("Write New York Taxi data to S3 transform table")
     ny_taxi_df.write.mode("overwrite").parquet(output_folder)
