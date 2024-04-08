@@ -84,7 +84,7 @@ spec:
       runAsUser: 1000  # User ID
     cores: 1
     coreLimit: "1200m"
-    memory: "4g"
+    memory: "16g"
     memoryOverhead: "4g"
     serviceAccount: spark-team-a
     labels:

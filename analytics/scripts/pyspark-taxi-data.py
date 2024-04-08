@@ -39,11 +39,11 @@ def main(args):
     # Beef up the data by duplicating it 100 times
     for i in range(100):
         ny_taxi_df = ny_taxi_df.union(ny_taxi_df)
+        if i % 10 == 0:
+            logger.info("Repartitioning")
+            ny_taxi_df = ny_taxi_df.repartition(i)
 
     logger.info("Total number of records: " + str(ny_taxi_df.count()))
-
-    logger.info("Repartitioning")
-    ny_taxi_df = ny_taxi_df.repartition(100)
 
     #logger.info("Write New York Taxi data to S3 transform table")
     ny_taxi_df.write.mode("overwrite").parquet(output_folder)
