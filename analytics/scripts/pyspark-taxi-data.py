@@ -16,7 +16,7 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 dt_string = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-AppName = ""
+AppName = "NewYorkTaxiData"
 
 
 def main(args):

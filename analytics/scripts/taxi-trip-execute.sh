@@ -30,20 +30,4 @@ aws s3 cp pyspark-taxi-trip.py s3://${S3_BUCKET}/taxi-trip/scripts/ --region ${R
 # Copy Test Input data to S3 bucket
 wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2022-01.parquet -O "input/yellow_tripdata_2022-0.parquet"
 aws s3 cp "input/yellow_tripdata_2022-0.parquet" s3://${S3_BUCKET}/input/yellow_tripdata_2022-0.parquet
-
-pids=()
-
-# Making duplicate copies to increase the size of the data.
-max=100
-for (( i=1; i <= $max; ++i ))
-do
-  aws s3 cp s3://${S3_BUCKET}/input/yellow_tripdata_2022-0.parquet s3://${S3_BUCKET}/input/yellow_tripdata_2022-${i}.parquet &
-  pids+=($!)
-done
-
-for pid in "${pids[@]}"; do
-    wait $pid
-done
-
-# Delete a local input folder
-rm -rf input
+aws s3 cp "pyspark-taxi-data.py" s3://${S3_BUCKET}/scripts/pyspark-taxi-data.py

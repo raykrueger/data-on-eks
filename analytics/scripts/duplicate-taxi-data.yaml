@@ -30,8 +30,8 @@ spec:
   imagePullPolicy: IfNotPresent
   mainApplicationFile: "s3a://spark-operator-doeks-spark-logs-20240321163210717000000001/taxi-data/scripts/pyspark-taxi-data.py"  # MainFile is the path to a bundled JAR, Python, or R file of the application
   arguments:
-    - "s3a://spark-operator-doeks-spark-logs-20240321163210717000000001/taxi-data/input/yellow_tripdata_2022-0.parquet"
-    - "s3a://spark-operator-doeks-spark-logs-20240321163210717000000001/taxi-data/input/"
+    - "s3a://spark-operator-doeks-spark-logs-20240321163210717000000001/input/yellow_tripdata_2022-0.parquet"
+    - "s3a://spark-operator-doeks-spark-logs-20240321163210717000000001/input/"
   hadoopConf:
     "fs.s3a.aws.credentials.provider": "com.amazonaws.auth.WebIdentityTokenCredentialsProvider"
     "fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem"
