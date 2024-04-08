@@ -37,7 +37,7 @@ def main(args):
     ny_taxi_df = spark.read.parquet(input_file)
 
     # Beef up the data by duplicating it 100 times
-    for i in range(100):
+    for i in range(3):
         ny_taxi_df = ny_taxi_df.union(ny_taxi_df)
 
     logger.info("Total number of records: " + str(ny_taxi_df.count()))
