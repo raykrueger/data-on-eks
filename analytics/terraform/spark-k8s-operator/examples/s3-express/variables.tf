@@ -30,7 +30,7 @@ variable "route_table_ids" {
   }
 }
 
-variable "eks_cluster_name" {
+variable "cluster_name" {
   description = "EKS cluster name"
   type        = string
 }

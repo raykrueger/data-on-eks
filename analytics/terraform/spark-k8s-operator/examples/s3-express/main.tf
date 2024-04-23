@@ -25,7 +25,7 @@ locals {
 
 data "aws_availability_zones" "available" {}
 data "aws_eks_cluster" "cluster" {
-  name = var.eks_cluster_name
+  name = var.cluster_name
 }
 
 data "aws_iam_openid_connect_provider" "cluster" {

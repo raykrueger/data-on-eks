@@ -8,7 +8,7 @@ output "cluster_arn" {
 }
 
 output "cluster_name" {
-  description = "The Amazon Resource Name (ARN) of the cluster"
+  description = "The name of the cluster"
   value       = module.eks.cluster_id
 }
 
@@ -49,4 +49,9 @@ output "vpc_id" {
 output "route_table_ids" {
   description = "Route table IDs"
   value       = module.vpc.private_route_table_ids
+}
+
+output "region" {
+  description = "Region"
+  value       = local.region
 }
