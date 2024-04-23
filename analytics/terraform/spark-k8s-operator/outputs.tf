@@ -9,7 +9,7 @@ output "cluster_arn" {
 
 output "cluster_name" {
   description = "The name of the cluster"
-  value       = module.eks.cluster_id
+  value       = module.eks.cluster_name
 }
 
 output "configure_kubectl" {
