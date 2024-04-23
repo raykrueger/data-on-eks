@@ -377,7 +377,13 @@ If you are interested in testing S3 Express One Zone Directory buckets and the
 S3 mountpoint CSI driver, you will need to deploy the Data on EKS solution into
 one of the [supported regions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-networking.html).
 
+First you will need the variables created by the cluster creation step
+previously. This will create an inputput.tfvars file that has all of the
+variables you will need in order to deploy the S3 express sample stack.
+
 ```bash
+cd ${DOEKS_HOME}/analytics/terraform/spark-k8s-operator/
+terraform output > examples/s3-express/input.tfvars
 cd ${DOEKS_HOME}/analytics/terraform/spark-k8s-operator/examples/s3-express
 ```
 
@@ -388,16 +394,20 @@ copy the data over from the Data on EKS bucket.
 <TaxiTripExecute />
 
 This sample contains a separate Terraform application stack that creates the S3
-Express Directory Bucket. You will deploy that then populate the bucket.
+Express Directory Bucket. You will deploy that then populate the bucket. Feel
+free to run `plan` instead of `apply` below if you want to see the Terraform
+plan.
 
 ``` bash
-export TF_VAR_region=YOUR_REGION_HERE
 terraform init
-terraform apply
+terraform apply -var-file input.tfvars
 export S3_EXP_BUCKET=$(terraform output -raw s3_express_directory_bucket_name)
 ```
 
 Now that the S3 Express Bucket is in place you can copy the sample data into it.
+Note that S3 Express Buckets do not support the s3 sync command. So we're going
+to rely on the previous S3 Bucket used for sample data and bring that over to
+our Express bucket.
 
 ```bash
 aws s3 cp --recursive s3://${S3_BUCKET}/taxi-trip/input/ s3://${S3_EXP_BUCKET}/taxi-trip/input/
